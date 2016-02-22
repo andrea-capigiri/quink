@@ -111,4 +111,4 @@ function Generate_Bookmark_Item(item) {
     }
 }
 
-$("#goto-bookmarks").click(function() { chrome.tabs.update({ url: "chrome://bookmarks" }); });
+$(".goto").click(function() { chrome.tabs.update({ url: $(this).data("url") }); });

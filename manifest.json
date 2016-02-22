@@ -1,16 +1,17 @@
 {
     "name": "Chorme Material Start",
-    "description": "Pithy description (132 characters or less, no HTML)",
+    "description": "Chrome material design new tab page",
     "version": "0.0.0.5",
     "manifest_version": 2,
     "offline_enabled": true,
     "permissions": [
         "bookmarks",
         "topSites",
-        "chrome://favicon/"
+        "storage",
+        "chrome://favicon/",
+        "http://*/*",
+        "https://*/*",
     ],
-    "chrome_url_overrides" : {
-        "newtab": "main.html"
-    },
+    "chrome_url_overrides" : { "newtab": "main.html" },
     "options_page": "options.html"
 }
