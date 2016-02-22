@@ -1,0 +1,16 @@
+{
+    "name": "Chorme Material Start",
+    "description": "Pithy description (132 characters or less, no HTML)",
+    "version": "0.0.0.5",
+    "manifest_version": 2,
+    "offline_enabled": true,
+    "permissions": [
+        "bookmarks",
+        "topSites",
+        "chrome://favicon/"
+    ],
+    "chrome_url_overrides" : {
+        "newtab": "main.html"
+    },
+    "options_page": "options.html"
+}
