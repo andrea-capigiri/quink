@@ -1,9 +1,13 @@
 ///
 /// ON LOAD
-$(".most-visited").html("");
-chrome.topSites.get(function (items) {
-    $(".most-visited").html( $(".most-visited").html() +  Generate_MostVisited_Item(items) );
+chrome.storage.sync.get("optShowMostVisited", function(obj) {
+    chrome.topSites.get(function (items) {
+        $(".most-visited").html( $(".most-visited").html() +  Generate_MostVisited_Item(items) );
+        if(obj.optShowMostVisited) $(".most-visited").show();
+    });
 });
+var optUseFavicon = false;
+chrome.storage.sync.get("optUseFavicon", function(obj) { optUseFavicon = obj.optUseFavicon; });
 
 $(".bookmark-bar").html("");
 chrome.bookmarks.getChildren("1", function(items) {
@@ -33,7 +37,7 @@ function Generate_MostVisited_Item(item) {
     else if (item.url != undefined) {
         return "<a href='" + item.url + "'>\
                     <div class='item'>\
-                        <img src='' />\
+                        <img src='chrome://thumb/" + item.url + "' />\
                         <div class='label'>" + item.title + "</div>\
                     </div>\
                 </a>";
@@ -50,65 +54,33 @@ function Generate_Bookmark_Item(item) {
         return HTML;
     } /// Bookmark
     else if (item.url != undefined) {
+        item.icon = "<span class='mdi mdi-bookmark-outline'>";
+        if (optUseFavicon) item.icon = "<img src='chrome://favicon/" + item.url + "'>";
+
         return "<a href='" + item.url + "'>\
                     <div class='md-item'>\
-                        <div class='md-item-icon'><span class='mdi mdi-bookmark-outline'></span></div>\
-                        <div class='md-item-title'>\
-                            <div class='docs-homescreen-list-item-title-value'>" + item.title + "</div>\
-                            <span class='docs-homescreen-list-item-shared-icon' title='Shared'>\
-                                <div class='docs-homescreen-icon docs-homescreen-icon-medium'>\
-                                    <div class='docs-homescreen-img docs-homescreen-shared-black-24'></div>\
-                                </div>\
-                            </span>\
-                        </div>\
-                        <div class='docs-homescreen-item-overflow' id=':42.d-h-iv-of' tabindex='-1' role='button' aria-haspopup='true' aria-label='More actions. Popup button.'>\
-                            <div class='docs-homescreen-icon docs-homescreen-icon-medium'>\
-                                <div class='docs-homescreen-img docs-homescreen-item-overflow-24'></div>\
-                            </div>\
-                        </div>\
-                        <div class='docs-homescreen-dummyanchor'></div>\
+                        <div class='md-item-icon'>" + item.icon + "</div>\
+                        <div class='md-item-title'>" + item.title + "</div>\
                     </div>\
                 </a>";
     } /// Cartella
     else {
-        var a = "<a href='" + item.url + "'>\
+        return "<a href='" + item.url + "'>\
                     <div class='md-item'>\
-                        <div class='md-item-icon'><span class='mdi mdi-folder-outline'></span></div>\
-                        <div class='md-item-title'>\
-                            <div class='docs-homescreen-list-item-title-value'>" + item.title + "</div>\
-                            <span class='docs-homescreen-list-item-shared-icon' title='Shared'>\
-                                <div class='docs-homescreen-icon docs-homescreen-icon-medium'>\
-                                    <div class='docs-homescreen-img docs-homescreen-shared-black-24'></div>\
-                                </div>\
-                            </span>\
-                        </div>\
-                        <div class='docs-homescreen-item-overflow' id=':42.d-h-iv-of' tabindex='-1' role='button' aria-haspopup='true' aria-label='More actions. Popup button.'>\
-                            <div class='docs-homescreen-icon docs-homescreen-icon-medium'>\
-                                <div class='docs-homescreen-img docs-homescreen-item-overflow-24'></div>\
-                            </div>\
-                        </div>\
-                        <div class='docs-homescreen-dummyanchor'></div>\
+                        <div class='md-item-icon'><span class='mdi mdi-folder-outline'></div>\
+                        <div class='md-item-title'>" + item.title + "</div>\
                     </div>\
                 </a>"
                 + Generate_Bookmark_Item(item.children);
-        /*var a = "<tr>\
-                    <td class='favicon'><i class='ico mdi mdi-folder-outline'></i></td>\
-                    <td class='mdl-data-table__cell--non-numeric'><a href='" + item.url + "'>" + item.title + "</a></td>\
-                    <td style='width: 20px;'><i class='mdi mdi-chevron-right'></i></td>\
-                </tr>"
-                + Generate_Bookmark_Item(item.children);
-        return chrome.bookmarks.getChildren(item.id, function(ls) {
-            a+= "<tr>\
-                    <td><i class='ico mdi mdi-folder-outline'></i></td>\
-                    <td class='mdl-data-table__cell--non-numeric'><a href='" + item.url + "'>" + item.title + "</a></td>\
-                    <td style='width: 20px;'><i class='mdi mdi-chevron-right'></i></td>\
-                </tr>"
-                + Generate_Bookmark_Item(ls);
-                    //<a class='ico mdi mdi-folder-outline'></a>\
-                    //<td style='width: 20px;'><i class='mdi mdi-chevron-right'></i></td>
-        });*/
         return a;
     }
 }
+
+$("main").masonry({
+    itemSelector: ".flex-item",
+    columnWidth: ".flex-item",
+    gutter: 10,
+    fitWidth: true
+});
 
 $(".goto").click(function() { chrome.tabs.update({ url: $(this).data("url") }); });

@@ -5,35 +5,38 @@
     <title>Material Start</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/css/material.min.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/css/master.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="/css/materialdesignicons.min.css" media="screen" charset="utf-8">
 </head>
 <body>
 
     <header>
-        <div class="app-title">Material Start</div>
+        <div class="app-title goto" data-url="chrome://newtab">Material Start</div>
         <div class="app-links">
             <div class="app-link goto" data-url="chrome://bookmarks"><span title="Go to Bookmarks" class="mdi mdi-bookmark-outline"></span></div>
-            <div class="app-link goto" data-url="/options.html"><span title="Credits" class="mdi mdi-settings"></span></div>
+            <div class="app-link goto" data-url="/options.html"><span title="Settings" class="mdi mdi-settings"></span></div>
             <div class="app-link goto" data-url="http://andreacapigiri.com/chrome-material-start"><span title="Credits" class="mdi mdi-comment-account-outline"></span></div>
         </div>
     </header>
     <div class="most-visited"></div>
-    <main>
-
+    <!--<div class="row">
+        <div class="md md-panel" style="margin:10px auto; background:#FFE8A2;">
+            asda<br>asda<br>asda<br>asda<br>
+        </div>
+    </div>-->
+    <main class="masonry">
         <div class="md flex-item">
             <div class="label">Bookmark Bar</div>
-            <table class="bookmark-pg mdl-data-table bookmark-bar"></table>
+            <div class="bookmark-pg bookmark-bar"></div>
         </div>
         <div class="md flex-item">
             <div class="label">Other Bookmarks</div>
-            <table class="bookmark-pg mdl-data-table other-bookmark"></table>
+            <div class="bookmark-pg other-bookmark"></div>
         </div>
-
     </main>
 
     <script type="text/javascript" src="script/jquery.min.js"></script>
+    <script type="text/javascript" src="script/masonry.min.js"></script>
     <script type="text/javascript" src="script/main.js"></script>
     <script type="text/javascript" src="script/material.min.js"></script>
 </body>

@@ -1,7 +1,8 @@
 {
-    "name": "Chorme Material Start",
-    "description": "Chrome material design new tab page",
-    "version": "0.0.0.5",
+    "name": "Chorme Material Start - Beta",
+    "short_name": "Material Start - Beta",
+    "description": "Chrome material design new tab page - Beta version",
+    "version": "0.6",
     "manifest_version": 2,
     "offline_enabled": true,
     "permissions": [
@@ -9,8 +10,8 @@
         "topSites",
         "storage",
         "chrome://favicon/",
-        "http://*/*",
         "https://*/*",
+        "http://*/*"
     ],
     "chrome_url_overrides" : { "newtab": "main.html" },
     "options_page": "options.html"
