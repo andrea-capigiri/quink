@@ -2,7 +2,7 @@
     "name": "Chorme Material Start - Beta",
     "short_name": "Material Start - Beta",
     "description": "Chrome material design new tab page - Beta version",
-    "version": "0.6",
+    "version": "0.7",
     "manifest_version": 2,
     "offline_enabled": true,
     "permissions": [

@@ -10,18 +10,34 @@ $('body').on('click', '.md-table', function() {
         subContainer.slideDown(100);
     }
 });
-
+var DOM = {
+    QueryInput:         $('.search-input'),
+    notepad:            $('section#notepad'),
+    mostvisited:        $('section#mostvisited')
+}
 var opt = {
-    usefavicon:       true,
-    mostvisited:      true,
-    notepad:          true,
-    autoexpanded:     false
+    usefavicon:         true,
+    mostvisited:        true,
+    autoexpanded:       false,
+    notepad:            true,
+    notepad_content:    '',
 };
 chrome.storage.sync.get('options', function (data) {
     /// GETTING OPTIONS FROM STORAGE
     if (data == null) chrome.storage.sync.set('options', opt);
     else opt = $.extend({}, opt, data);
 
+    /// NOTEPAD EVENTS
+    if (opt.notepad) {
+        DOM.notepad.html(opt.notepad_content);
+        $('body').on('keydown', 'section#notepad', function() {
+            opt.notepad_content = DOM.notepad.html();
+        });
+    }
+
+    chrome.topSites.get(function (items) {
+        if (opt.mostvisited) DOM.mostvisited.html(Generate_Bookmark_Item(items));
+    });
     chrome.bookmarks.getSubTree('1', function(items) {
         $(".bookmark-bar").html(Generate_Bookmark_Item(items[0].children));
     });
@@ -29,15 +45,41 @@ chrome.storage.sync.get('options', function (data) {
 
 
 });
+$(function() {
+    DOM.QueryInput.on('focusin',  function(e) { $(".search-result").fadeIn(100);  });
+    DOM.QueryInput.on('focusout', function(e) { $(".search-result").fadeOut(100); });
+    DOM.QueryInput.on('keyup',    function(e) {
+        $(".search-result-content").toggle(DOM.QueryInput.val().length > 0);
+        if (DOM.QueryInput.val().length > 0 && e.keyCode == 13)
+            chrome.tabs.update({ url: 'https://google.com/search?q=' + encodeURIComponent(this.value) });
+        else if (DOM.QueryInput.val().length > 1)
+            chrome.bookmarks.search(this.value, function (data) {
+                var HTML = '\
+                    <a class="md-table" href="https://google.com/search?q=' + encodeURIComponent(this.value) + '">\
+                        <div class="md-row">\
+                            <div class="md-item-icon"><span class="mdi mdi-magnify"></span></div>\
+                            <div class="md-item-title">' + DOM.QueryInput.val() + '</div>\
+                        </div>\
+                    </a>';
+                HTML += Generate_Bookmark_Item(data, false);
+                $(".search-result-content").html(HTML);
+            });
+    });
+});
+
+
+
+/*
+Object.observe(opt, function(changes) {
+    console.log(changes[0]);
+
+});
 
 
 ///
 /// ON LOAD
 /*chrome.storage.sync.get("optShowMostVisited", function(obj) {
-    chrome.topSites.get(function (items) {
-        $(".most-visited").html( $(".most-visited").html() +  Generate_MostVisited_Item(items) );
-        if(obj.optShowMostVisited) $(".most-visited").show();
-    });
+
 });
 */
 
@@ -56,7 +98,7 @@ var MostVisited_Count = 0;
 function Generate_MostVisited_Item(item) {
     if (item == undefined || item == null) return "";
     /// Array di elementi
-    if (MostVisited_Count == 7) return "";
+    //if (MostVisited_Count == 7) return "";
     MostVisited_Count ++;
     if (item instanceof Array) {
         var HTML = "";
@@ -74,13 +116,15 @@ function Generate_MostVisited_Item(item) {
                 </a>";
     }
 }
-function Generate_Bookmark_Item(item) {
+function Generate_Bookmark_Item(item, showFolder) {
     if (item == undefined || item == null) return "";
+    if (showFolder == undefined) showFolder = true;
+
     /// Array di elementi
     if (item instanceof Array) {
         var HTML = "";
         item.forEach(function(obj) {
-            HTML += Generate_Bookmark_Item(obj);
+            HTML += Generate_Bookmark_Item(obj, showFolder);
         });
         return HTML;
     } /// Bookmark
@@ -91,11 +135,13 @@ function Generate_Bookmark_Item(item) {
         return "<a class='md-table' href='" + item.url + "'>\
                     <div class='md-row'>\
                         <div class='md-item-icon'>" + item.icon + "</div>\
-                        <div class='md-item-title'>" + item.title + "</div>\
+                        <div class='md-item-title'>" + item.title + "\
+                            <div class='small'>" + item.url + "</div>\
+                        </div>\
                     </div>\
                 </a>";
     } /// Cartella
-    else {
+    else if (showFolder) {
         item.expandicon = "<span class='mdi mdi-plus'></span>";
         item.expanddisplay = "style='display:none;'";
         if (opt.autoexpanded) { item.expandicon = "<span class='mdi mdi-minus'></span>"; item.expanddisplay = ""; }
@@ -107,7 +153,8 @@ function Generate_Bookmark_Item(item) {
                     </div>\
                 </div>\
                 <div class='md-folder-exploded' data-folder='" + item.id + "' " + item.expanddisplay + " >\
-                    " + Generate_Bookmark_Item(item.children) + "\
+                    " + Generate_Bookmark_Item(item.children, showFolder) + "\
                 </div>";
     }
+    return " ";
 }

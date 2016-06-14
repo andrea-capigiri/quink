@@ -9,8 +9,10 @@ chrome.storage.sync.get(null, function(items) {
     var allKeys = Object.keys(items);
     console.log(allKeys);
     for (var i=0; i<Object.keys(items); i++)
-    if (opt.item) {
+    {
+        if (opt.Object.keys[i]) {
 
+        }
     }
 });
 

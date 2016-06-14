@@ -11,20 +11,35 @@
 <body>
 
     <header>
-        <div class="app-title goto" data-url="chrome://newtab">Material Start</div>
-        <div class="app-links">
-            <div class="app-link goto" data-url="chrome://bookmarks"><span title="Go to Bookmarks" class="mdi mdi-bookmark-outline"></span></div>
-            <div class="app-link goto" data-url="/options.html"><span title="Settings" class="mdi mdi-settings"></span></div>
-            <div class="app-link goto" data-url="http://andreacapigiri.com/chrome-material-start"><span title="Credits" class="mdi mdi-comment-account-outline"></span></div>
+        <div class="row header-top">
+            <div class="container">
+                <input class="search-input" type="text" name="query" id="query" placeholder="Search"/>
+                <!--<div class="col-6 text-left app-title goto" data-url="chrome://newtab">Material Start</div>
+                <div class="col-6 text-right app-links">
+                    <div class="app-link goto" data-url="chrome://bookmarks"><span title="Go to Bookmarks" class="mdi mdi-bookmark-outline"></span></div>
+                    <div class="app-link goto" data-url="/options.html"><span title="Settings" class="mdi mdi-settings"></span></div>
+                    <div class="app-link goto" data-url="http://andreacapigiri.com/chrome-material-start"><span title="Credits" class="mdi mdi-comment-account-outline"></span></div>
+                </div>-->
+            </div>
         </div>
     </header>
-    <div class="most-visited"></div>
-    <!--<div class="row">
-        <div class="md md-panel" style="margin:10px auto; background:#FFE8A2;">
-            asda<br>asda<br>asda<br>asda<br>
+    <div class="search-result dark" style="display:none;">
+        <div class="container">
+            <div class="flex-item search-result-content"></div>
         </div>
-    </div>-->
-    <main class="masonry" style="height:100vh">
+    </div>
+
+
+    <main class="masonry" style="min-height:100vh">
+
+        <div class="row tabs text-center">
+            <span class="tab active">Bookmarks</span>
+            <span class="tab">Note</span>
+            <span class="tab">Last Visited</span>
+        </div>
+
+        <section class="md flex-item" id="mostvisited"></section>
+        <section class="md flex-item" id="notepad" contenteditable="true"></section>
         <div class="md flex-item">
             <!--<div class="label">Bookmark Bar</div>-->
             <div class="bookmark-pg bookmark-bar"></div>
