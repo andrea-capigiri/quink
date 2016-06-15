@@ -13,6 +13,7 @@
     <header>
         <div class="row header-top">
             <div class="container">
+                <span class="search-input-icon mdi mdi-magnify"></span>
                 <input class="search-input" type="text" name="query" id="query" placeholder="Search"/>
                 <!--<div class="col-6 text-left app-title goto" data-url="chrome://newtab">Material Start</div>
                 <div class="col-6 text-right app-links">
@@ -28,26 +29,22 @@
             <div class="flex-item search-result-content"></div>
         </div>
     </div>
-
-
     <main class="masonry" style="min-height:100vh">
 
         <div class="row tabs text-center">
             <span class="tab active">Bookmarks</span>
-            <span class="tab">Note</span>
-            <span class="tab">Last Visited</span>
+            <!--<span class="tab">Note</span>
+            <span class="tab">Last Visited</span>-->
         </div>
 
-        <section class="md flex-item" id="mostvisited"></section>
+        <!--<section class="md flex-item" id="mostvisited"></section>
         <section class="md flex-item" id="notepad" contenteditable="true"></section>
         <div class="md flex-item">
-            <!--<div class="label">Bookmark Bar</div>-->
+            <!-<div class="label">Bookmark Bar</div>--
             <div class="bookmark-pg bookmark-bar"></div>
-        </div>
-        <div class="md flex-item">
-            <!--<div class="label">Other Bookmarks</div>-->
-            <div class="bookmark-pg other-bookmark"></div>
-        </div>
+        </div>-->
+        <div class="md flex-item bookmark-bar"></div>
+        <!--</div>-->
     </main>
 
     <script type="text/javascript" src="script/jquery.min.js"></script>
