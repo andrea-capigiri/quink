@@ -19,6 +19,7 @@
         mostvisited:        $('section#mostvisited')
     }
     var opt = {
+        DEBUG:              true,
         usefavicon:         true,
         mostvisited:        true,
         autoexpanded:       false,
@@ -47,22 +48,26 @@
     });
 
     DOM.QueryInput.on('focusin', function(e) { $(".search-result").fadeIn(100); DOM.QueryInput.trigger('keyup'); });
-    DOM.QueryInput.on('focusout', function(e) { $(".search-result").fadeOut(100); });
+    DOM.QueryInput.on('focusout', function(e) { if (!opt.DEBUG) $(".search-result").fadeOut(100); });
     DOM.QueryInput.on('keydown', function(e) {
         var lsItem = $('.md-table.highlight');
-        var lsPrev = lsItem.prev();
-        var lsNext = lsItem.next();
         switch (e.keyCode)
         {
+            case 27:
+                e.preventDefault();
+                DOM.QueryInput.val('').trigger('focusout');
+                break;
             case 38:
-                if (lsPrev != null) {
+                var lsPrev = lsItem.prev();
+                if (lsPrev.length != 0) {
                     e.preventDefault();
                     lsItem.removeClass('highlight');
                     lsPrev.addClass('highlight');
                 }
                 break;
             case 40:
-                if (lsNext != null) {
+                var lsNext = lsItem.next();
+                if (lsNext.length != 0) {
                     e.preventDefault();
                     lsItem.removeClass('highlight');
                     lsNext.addClass('highlight');
@@ -91,7 +96,9 @@
                     <a class="md-table" href="https://google.com/search?q=' + encodeURIComponent(this.value) + '">\
                         <div class="md-row">\
                             <div class="md-item-icon"><span class="mdi mdi-magnify"></span></div>\
-                            <div class="md-item-title">' + DOM.QueryInput.val() + '</div>\
+                            <div class="md-item-title">' + DOM.QueryInput.val() + '\
+                                <span class="pull-right" style="margin-left:10px">Search on Google.com</span>\
+                            </div>\
                         </div>\
                     </a>';
             HTML += Generate_Bookmark_Item(data, false);
