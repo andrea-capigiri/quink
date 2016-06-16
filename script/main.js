@@ -19,7 +19,7 @@
         mostvisited:        $('section#mostvisited')
     }
     var opt = {
-        DEBUG:              true,
+        DEBUG:              false,
         usefavicon:         true,
         mostvisited:        true,
         autoexpanded:       false,

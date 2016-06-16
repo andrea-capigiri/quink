@@ -2,7 +2,7 @@
     "name": "Quink Lite - Your quick bookmark tab",
     "short_name": "Quink Lite",
     "description": "Quink - Your quick bookmark tab.",
-    "version": "1.0.1",
+    "version": "1.0.2",
 
     "offline_enabled": true,
     "manifest_version": 2,
