@@ -93,12 +93,10 @@
                 </a>';
             if (DOM.QueryInput.val().length != 0)
                 HTML += '\
-                    <a class="md-table" href="https://google.com/search?q=' + encodeURIComponent(this.value) + '">\
+                    <a class="md-table" href="https://google.com/search?q=' + encodeURIComponent(DOM.QueryInput.val()) + '">\
                         <div class="md-row">\
                             <div class="md-item-icon"><span class="mdi mdi-magnify"></span></div>\
-                            <div class="md-item-title">' + DOM.QueryInput.val() + '\
-                                <span class="pull-right" style="margin-left:10px">Search on Google.com</span>\
-                            </div>\
+                            <div class="md-item-title">Search on Google: ' + DOM.QueryInput.val() + '</div>\
                         </div>\
                     </a>';
             HTML += Generate_Bookmark_Item(data, false);
