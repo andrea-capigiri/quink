@@ -139,7 +139,7 @@ DOM.QueryInput.on('keyup', function(e) {
         }
         HTML += Generate_Bookmark_Item(data, false);
         HTML += '\
-            <a class="md-table donate " href="https://andreacapigiri.com/donate?src=chrome-material-start">\
+            <a class="md-table donate " href="https://andreacapigiri.com/quink?scope=donate&src=quink-search">\
                 <div class="md-row">\
                     <div class="md-item-icon"><span class="mdi mdi-currency-usd"></span></div>\
                     <div class="md-item-title">Please donate to help the project!</div>\
