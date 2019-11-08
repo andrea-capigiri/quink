@@ -217,8 +217,8 @@ function Generate_Bookmark_Item(item, showFolder) {
 
         return "<div class='md-table' data-folder='" + item.id + "'>\
                         <div class='md-row md-folder'>\
-                            <div class='md-item-title'>" + item.title + "</div>\
                             <div class='md-item-expand'>" + item.expandicon + "</div>\
+                            <div class='md-item-title'>" + item.title + "</div>\
                         </div>\
                     </div>\
                     <div class='md-folder-exploded' data-folder='" + item.id + "' " + item.expanddisplay + " >\
