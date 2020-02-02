@@ -1,8 +1,8 @@
 {
-    "name": "Quink Lite - Your quick bookmark new tab",
-    "short_name": "Quink Lite",
-    "description": "Quink Lite - Your quick bookmark new tab.",
-    "version": "1.0.4",
+    "name": "Quink - Your quick bookmark new tab",
+    "short_name": "Quink",
+    "description": "Quink - Your quick bookmark new tab",
+    "version": "2.0",
 
     "offline_enabled": true,
     "manifest_version": 2,
