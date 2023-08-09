@@ -46,7 +46,7 @@ chrome.storage.sync.get('options', function(data) {
     }
 
     chrome.bookmarks.getSubTree('1', function(items) {
-        $(".bookmark-bar").html(Generate_Bookmark_Item(items[0].children));
+        $(".bookmark-bar").html(generate_Bookmark_Item(items[0].children));
         $('main').toggle(true);
     });
 });
@@ -54,7 +54,7 @@ chrome.storage.sync.get('options', function(data) {
 ///
 ///   FUNCTIONS
 
-function Generate_Bookmark_Item(item, showFolder) {
+function generate_Bookmark_Item(item, showFolder) {
     if (item == undefined || item == null) return "";
     if (showFolder == undefined) showFolder = true;
 
@@ -62,13 +62,13 @@ function Generate_Bookmark_Item(item, showFolder) {
     if (item instanceof Array) {
         var HTML = "";
         item.forEach(function(obj) {
-            HTML += Generate_Bookmark_Item(obj, showFolder);
+            HTML += generate_Bookmark_Item(obj, showFolder);
         });
         return HTML;
     } /// Bookmark
     else if (item.url != undefined) {
         item.icon = "<span class='mdi mdi-bookmark-outline'>";
-        if (opt.usefavicon) item.icon = "<img src='chrome://favicon/" + item.url + "'>";
+        if (opt.usefavicon) item.icon = "<img src='" + getFaviconUrl(item.url) + "'>";
 
         return "<a class='md-table' href='" + item.url + "'>\
                         <div class='md-row'>\
@@ -94,12 +94,19 @@ function Generate_Bookmark_Item(item, showFolder) {
                         </div>\
                     </div>\
                     <div class='md-folder-exploded' data-folder='" + item.id + "' " + item.expanddisplay + " >\
-                        " + Generate_Bookmark_Item(item.children, showFolder) + "\
+                        " + generate_Bookmark_Item(item.children, showFolder) + "\
                     </div>";
     }
     return " ";
 }
 
-function IsUrl(s) {
+function isUrl(s) {
     return s.match(/(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi);
+}
+
+function getFaviconUrl(u) {
+    const url = new URL(chrome.runtime.getURL("/_favicon/"));
+    url.searchParams.set("pageUrl", u);
+    url.searchParams.set("size", "16");
+    return url.toString();
 }
