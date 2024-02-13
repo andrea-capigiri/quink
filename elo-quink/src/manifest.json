@@ -1,0 +1,17 @@
+{
+    "name": "Quink - Your quick bookmark new tab",
+    "short_name": "Quink",
+    "description": "Quink - Your quick bookmark new tab",
+    "version": "3.0",
+
+    "offline_enabled": true,
+    "manifest_version": 3,
+    "permissions": [
+        "bookmarks",
+        "topSites",
+        "storage"
+    ],
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    }
+}
