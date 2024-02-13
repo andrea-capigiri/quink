@@ -34,11 +34,14 @@ a { overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-spac
 
 
 /* TEMA CHIARO */
+@media (prefers-color-scheme: ligth) {
     body { background-color: #F1F3F4; }
     main { color: #737373; }
     .md { background-color: #FFFFFF; box-shadow: 0 4px 10px -2px #0000002E; }
     .md .md-row { color: #484848; }
+    .md .md-row:hover { background-color: rgba(0, 0, 0, 0.25); }
     .md .md-folder-exploded { background-color:rgba(0,0,0,.02); box-shadow: inset 0 8px 8px -12px black; }
+}
 
 /* TEMA SCURO */
 @media (prefers-color-scheme: dark) {
@@ -46,5 +49,6 @@ a { overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-spac
     main { color: #929292; }
     .md { background-color: #292A2D; box-shadow: 0 4px 10px -2px #FFFFFF26; }
     .md .md-row { color: #D2D2D2; }
-    .md .md-folder-exploded { background-color:rgba(0,0,0,.02); box-shadow: inset 0 8px 8px -12px black; }
+    .md .md-row:hover { background-color: rgba(255, 255, 255, 0.25); }
+    .md .md-folder-exploded { background-color:rgba(0,0,0,.02); box-shadow: 0px 1.6px 3.6px rgba(0,0,0,0.2543144461965935), 0px 0px 2.9px rgba(0,0,0,0.21518914678173293); }
 }

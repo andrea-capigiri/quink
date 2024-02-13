@@ -31,11 +31,13 @@ export class AppComponent {
     public bookmarks: BookmarkItem[] = [];
 
     constructor() {
-        this.bookmarks = this.bookmarks_source
-            .map(item => this._mapData(item))[0]
-            .children;
+        window.chrome.bookmarks.getTree()
+            .then((items) => {
+                this.bookmarks = (items.at(0)?.children ?? []) //this.bookmarks_source
+                    .map(item => this._mapData(item))[0]
+                    .children;
+            });
 
-        
         //"chrome://favicon/",
         //"https://*/*",
         //"http://*/*"
@@ -52,7 +54,6 @@ export class AppComponent {
         //      //     $('body').on('keydown', 'section#notepad', function () {
         //      //         opt.notepad_content = DOM.notepad.html();
         //      //     });
-        //      // }
         //
         //      window.chrome.bookmarks.getSubTree('1', (items) => {
         //          debugger
@@ -69,10 +70,17 @@ export class AppComponent {
             id: item.id,
             parentId: item.parentId,
             title: item.title,
-            iconSrc: '<img src="chrome://favicon/" + item.url + "">',
+            iconSrc: this.getFaviconURL(item.url),
             url: item.url,
             children: (!!item.children && item.children.length > 0) ? Object.values(item.children).map(c => this._mapData(c)) : []
         };
+    }
+
+    private getFaviconURL(u: string) {
+        const url = new URL(chrome.runtime.getURL("/_favicon/"));
+        url.searchParams.set("pageUrl", u);
+        url.searchParams.set("size", "32");
+        return url.toString();
     }
 
     private getBrowserInstance(): typeof chrome {

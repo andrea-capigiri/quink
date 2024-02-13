@@ -6,8 +6,8 @@
     <ng-container *ngFor="let $item of list">
         <ng-container *ngIf="$item.type=='folder'">
             <div class="md-table">
-                <div class="md-row md-folder">
-                    <div class="md-item-expand" (click)="this.$item.expanded=!$item.expanded">
+                <div class="md-row md-folder" (click)="this.$item.expanded=!$item.expanded">
+                    <div class="md-item-expand">
                         <span *ngIf="$item.expanded==false" class='mdi mdi-plus'></span>
                         <span *ngIf="$item.expanded==true" class='mdi mdi-minus'></span>
                     </div>
