@@ -1,10 +1,11 @@
 @font-face { font-family: "Roboto"; src: url("/font/Roboto-Regular.ttf"); }
 
 * { box-sizing: border-box; user-select: none; }
-html, body, main { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; min-height: 100vh; }
+html, body, main { display: block; font-family: 'Roboto', sans-serif; margin: 0; padding: 0; min-height: 100vh; }
 html, body, main { margin: auto; overflow: auto; font-size: 12px; letter-spacing: .7px; }
 
 
+body { overflow-y: scroll; }
 main {  max-width: 700px; padding: 0 1.5rem; }
 main > div { margin: 3rem 0; }
 
@@ -22,6 +23,8 @@ a { overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-spac
 .md-table .mdi { line-height: 16px; }
 .md-table .md-item-icon,
 .md-table .md-item-expand { display: inline-block; margin-top: auto; margin-bottom: auto; width: 16px; height: 16px; margin: 16px 0 16px 16px; white-space: nowrap; line-height: 0; }
+.md-table .md-item-icon { position: relative; }
+/* .md-table .md-item-icon::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; box-shadow: 0 4px 10px -2px #0000002E; } */
 .md-table .md-item-icon > img { width: 16px; height: 16px; }
 .md-table .md-item-icon .mdi { font-size: 16px; }
 .md-table .md-item-title { margin: 0 18px; font-size: 1rem; font-weight: 500; }
@@ -34,21 +37,37 @@ a { overflow: hidden; text-decoration: none; text-overflow: ellipsis; white-spac
 
 
 /* TEMA CHIARO */
-@media (prefers-color-scheme: ligth) {
+@media (prefers-color-scheme: light) {
     body { background-color: #F1F3F4; }
     main { color: #737373; }
-    .md { background-color: #FFFFFF; box-shadow: 0 4px 10px -2px #0000002E; }
+    .md { background-color: #FFFFFF; box-shadow: 0 12px 18px -2px #00000040; }
     .md .md-row { color: #484848; }
-    .md .md-row:hover { background-color: rgba(0, 0, 0, 0.25); }
     .md .md-folder-exploded { background-color:rgba(0,0,0,.02); box-shadow: inset 0 8px 8px -12px black; }
 }
 
 /* TEMA SCURO */
 @media (prefers-color-scheme: dark) {
-    body { background-color: #323232; }
+    body { background-color: #202124; }
     main { color: #929292; }
-    .md { background-color: #292A2D; box-shadow: 0 4px 10px -2px #FFFFFF26; }
+    .md { background-color: #35363a; /* box-shadow: 0 4px 10px -2px #FFFFFF26; */ }
     .md .md-row { color: #D2D2D2; }
-    .md .md-row:hover { background-color: rgba(255, 255, 255, 0.25); }
-    .md .md-folder-exploded { background-color:rgba(0,0,0,.02); box-shadow: 0px 1.6px 3.6px rgba(0,0,0,0.2543144461965935), 0px 0px 2.9px rgba(0,0,0,0.21518914678173293); }
+    .md .md-folder-exploded { background-color:rgba(0,0,0,.02); box-shadow: inset 0 8px 8px -12px black; }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #00000011;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ffffffaf;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffffea;
 }
