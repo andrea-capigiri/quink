@@ -5,7 +5,7 @@ html, body, main { display: block; font-family: 'Roboto', sans-serif; margin: 0;
 html, body, main { margin: auto; overflow: auto; font-size: 12px; letter-spacing: .7px; }
 
 
-body { overflow-y: scroll; }
+body { /* overflow-y: scroll; */ }
 main {  max-width: 700px; padding: 0 1.5rem; }
 main > div { margin: 3rem 0; }
 

@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 
 @Component({
     selector: 'app-root',
@@ -10,10 +9,7 @@ import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animati
     ],
     templateUrl: 'app.component.html',
     styleUrls: ['./app.component.scss'],
-    animations: [
-        fadeInOnEnterAnimation(),
-        fadeOutOnLeaveAnimation()
-    ]
+    animations: []
 })
 export class AppComponent {
     title = 'elo-quink';
