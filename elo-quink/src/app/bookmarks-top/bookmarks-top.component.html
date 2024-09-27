@@ -1,0 +1,10 @@
+@if (!!this.bookmarks) {
+    <div>
+        @for ($item of this.bookmarks; track $item.id) {
+            <a matRipple href="{{ $item.url }}">
+                <img [src]="$item.iconSrc" [alt]="$item.title">
+                {{ $item.title }}
+            </a>
+        }
+    </div>
+}

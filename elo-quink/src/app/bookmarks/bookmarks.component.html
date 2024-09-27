@@ -1,0 +1,36 @@
+
+<div class="md bookmark-bar">
+    <ng-container *ngTemplateOutlet="Recursion; context: { list: this.bookmarks }"></ng-container>
+    <ng-template #Recursion let-list="list">
+        <ng-container *ngFor="let $item of list">
+            <ng-container *ngIf="$item.type=='folder'">
+                <div class="md-table">
+                    <div class="md-row md-folder" (click)="this.$item.expanded=!$item.expanded">
+                        <div class="md-item-expand">
+                            <span *ngIf="$item.expanded==false" class='mdi mdi-plus'></span>
+                            <span *ngIf="$item.expanded==true" class='mdi mdi-minus'></span>
+                        </div>
+                        <div class="md-item-title">{{ $item.title }}</div>
+                    </div>
+                    <div class="md-folder-exploded" *ngIf="$item.expanded==true && !!$item.children && $item.children.length>0">
+                        <!-- <pre>{{$item | json}}</pre> -->
+                        <ng-container *ngTemplateOutlet="Recursion; context: { list: $item.children }"></ng-container>
+                    </div>
+                </div>
+            </ng-container>
+            
+            <ng-container *ngIf="$item.type=='bookmark'">
+                <a class="md-table" href="{{ $item.url }}">
+                    <div class="md-row">
+                        <div class="md-item-icon">
+                            <img [src]="$item.iconSrc" [alt]="$item.title">
+                        </div>
+                        <div class="md-item-title">{{$item.title}} 
+                            <div class="small">{{$item.url}}</div>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </ng-container>
+    </ng-template>
+</div>
