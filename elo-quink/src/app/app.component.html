@@ -1,7 +1,7 @@
 <main>
-
-    <app-bookmarks-top></app-bookmarks-top>
-    <app-bookmarks style="padding: 1.5rem; flex-grow: 1;"></app-bookmarks>
+    
+    <app-bookmarks-top *ngIf="!!this._service.topBookmarks"></app-bookmarks-top>
+    <app-bookmarks></app-bookmarks>
+    <!-- <app-footer></app-footer> -->
     
 </main>
-<app-footer></app-footer>

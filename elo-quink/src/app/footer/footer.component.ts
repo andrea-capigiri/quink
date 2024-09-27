@@ -14,10 +14,5 @@ import { MatIconModule } from '@angular/material/icon';
     styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
     public env: any = environment;
-
-    public editBookmarks() {
-        location.href = environment.favoriteEditorPath;
-    }
 }

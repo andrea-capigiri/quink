@@ -3,9 +3,10 @@
   "version": "3.0.2",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=48261",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "start": "ng serve --port=4222",
+    "watch": "ng build --watch --configuration development",
+    "build-chrome": "ng build --configuration=production-chrome",
+    "build-edge": "ng build --configuration=production-edge"
   },
   "private": true,
   "dependencies": {
