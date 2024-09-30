@@ -2,24 +2,51 @@
   "name": "Quink - Your quick bookmark new tab",
   "short_name": "Quink",
   "description": "Quink - Your quick bookmark new tab",
-  "version": "3.1.1",
-
+  "version": "3.1.2",
+  "icons": {
+    "16": "icons/icon_light_16.png",
+    "48": "icons/icon_light_48.png",
+    "128": "icons/icon_light_128.png"
+  },
+  "theme_icons": [
+    {
+      "light": "icons/icon_light_16.png",
+      "dark": "icons/icon_dark_16.png",
+      "size": 16
+    },
+    {
+      "light": "icons/icon_light_48.png",
+      "dark": "icons/icon_dark_48.png",
+      "size": 48
+    },
+    {
+      "light": "icons/icon_light_128.png",
+      "dark": "icons/icon_dark_128.png",
+      "size": 128
+    }
+  ],
   "offline_enabled": true,
   "manifest_version": 3,
   "permissions": [
-      "favicon",
-      "bookmarks",
-      "topSites",
-      "storage"
+    "favicon",
+    "bookmarks",
+    "topSites",
+    "storage"
   ],
   "web_accessible_resources": [
     {
-      "resources": ["_favicon/*"],
-      "matches": ["<all_urls>"],
-      "extension_ids": ["*"]
+      "resources": [
+        "_favicon/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "extension_ids": [
+        "*"
+      ]
     }
   ],
   "chrome_url_overrides": {
-      "newtab": "index.html"
+    "newtab": "index.html"
   }
 }
