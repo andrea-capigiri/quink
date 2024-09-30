@@ -13,7 +13,7 @@ export class ApplicationService {
     constructor() {
         this._getBookmarks().then(res => {
             let rootNode = res[0]?.children;
-            this.topBookmarks = (!!rootNode) ? this._mapData(rootNode[1])?.children : [];
+            this.topBookmarks = (!!rootNode) ? this._mapData(rootNode[1])?.children?.filter(t => t.type == 'bookmark') : [];
             this.bookmarks = (!!rootNode) ? this._mapData(rootNode[0])?.children : [];
         });
     }
