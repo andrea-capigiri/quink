@@ -48,6 +48,7 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "outputHashing": "all",
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.svg",
@@ -67,6 +68,14 @@
                   "with": "src/environments/environment.prod-chrome.ts"
                 }
               ],
+              "optimization": {
+                "fonts": true,
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              },
               "budgets": [
                 {
                   "type": "initial",
@@ -88,6 +97,14 @@
                   "with": "src/environments/environment.prod-edge.ts"
                 }
               ],
+              "optimization": {
+                "fonts": true,
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              },
               "budgets": [
                 {
                   "type": "initial",

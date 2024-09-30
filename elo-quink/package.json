@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve --port=4222",
     "watch": "ng build --watch --configuration development",
+    "watch-prod-chrome": "ng build --watch --configuration production-chrome",
     "build-chrome": "ng build --configuration=production-chrome",
     "build-edge": "ng build --configuration=production-edge"
   },
